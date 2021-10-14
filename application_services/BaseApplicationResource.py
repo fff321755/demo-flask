@@ -37,9 +37,7 @@ class BaseRDBApplicationResource(BaseApplicationResource):
     @classmethod
     def get_by_template(cls, template):
         db_name, table_name = cls.get_data_resource_info()
-        
-        print(db_name,table_name)
-        res = RDBService.find_by_template('imdbnew', 'users',
+        res = RDBService.find_by_template(db_name, table_name,
                                           template, None)
         return res
 
@@ -49,7 +47,14 @@ class BaseRDBApplicationResource(BaseApplicationResource):
         pass
 
     @classmethod
-    @abstractmethod
-    def get_data_resource_info(self):
-        pass
-        
+    def create_data_resource(cls, template):
+        db_name, table_name = cls.get_data_resource_info()
+        res = RDBService.create(db_name, table_name, template)
+        return res
+    
+    @classmethod
+    def get_next_id(cls, id_column):
+        db_name, table_name = cls.get_data_resource_info()
+        res = RDBService.next_id(db_name, table_name, id_column)
+        return res
+

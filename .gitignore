@@ -133,3 +133,5 @@ dmypy.json
 
 # pylint
 .pylintrc
+
+test.py
